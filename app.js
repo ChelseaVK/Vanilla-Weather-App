@@ -18,7 +18,7 @@ function searchCity(city) {
 function getForecast(city) {
   let apiKey = "5b7e32442badt617fc2dae0afo330c92";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios(apiUrl).then(displayForecast);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function refreshWeather(response) {
@@ -28,10 +28,22 @@ function refreshWeather(response) {
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let speedElement = document.querySelector("#speed");
+  let timeElement = document.querySelector("#time");
+  let date = new Date(response.data.time * 1000);
 
   cityElement.innerHTML = response.data.city;
   descriptionElement.innerHTML = response.data.condition.description;
   temperatureElement.innerHTML = Math.round(temperature);
-  humidityElement.innerHTML = `${response.data.temperature.humidity}%;
-  speedElement.innerHTML = 
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+  speedElement.innerHTML = `${response.data.wind.speed}mph';
+  timeElement.innerHTML = formatDate(date);
 }
+
+function formatDate(date) {
+  let day = days[date.getDay()];
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
+  let days =["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  return `${day} ${hours}:${minutes}`; 
+  if (minutes < 10) {
+  minutes = `0${minutes}`};}
