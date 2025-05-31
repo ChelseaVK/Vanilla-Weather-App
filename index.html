@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://github.com/axios/axios.git"></script>
     <title>Vanilla Weather App</title>
   </head>
   <body>
@@ -41,9 +41,14 @@
           </div>
           <div class="weather-app-temperature-container">
             <div id="icon"></div>
-            <div class="weather-app-temperature">12</div>
+            <div class="weather-app-temperature" id="temperature"></div>
             <div class="weather-app-unit">°C</div>
           </div>
+        </div>
+        <div class="weather-forecast">
+          <div class="weather-forecast-day">Tue</div>
+          <div class="weather-forecast-icon">☁</div>
+          <div class="weather-forecast-temperatures">15° 9°</div>
         </div>
       </main>
       <footer>
