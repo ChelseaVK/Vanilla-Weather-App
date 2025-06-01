@@ -1,26 +1,3 @@
-function handleSearchSubmit(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-form-input");
-  let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = searchInput.value;
-
-  searchCity(searchInput.value);
-  let searchFormElement = document.querySelector("#search-form");
-  searchFormElement.addEventListener("submit", handleSearchSubmit);
-}
-
-function searchCity(city) {
-  let apiKey = "5b7e32442badt617fc2dae0afo330c92";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query={query}&key={key}`;
-  axios.get(apiUrl).then(refreshWeather);
-}
-
-function getForecast(city) {
-  let apiKey = "5b7e32442badt617fc2dae0afo330c92";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-}
-
 function refreshWeather(response) {
   let temperatureElement = document.querySelector("#temperature");
   let temperature = response.data.temperature.current;
@@ -40,6 +17,7 @@ function refreshWeather(response) {
   temperatureElement.innerHTML = Math.round(temperature);
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
 }
+
 function formatDate(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
@@ -57,6 +35,24 @@ function formatDate(date) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-
   return `${day} ${hours}:${minutes}`;
 }
+
+function searchCity(city) {
+  let apiKey = "5b7e32442badt617fc2dae0afo330c92";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiURL).then(refreshWeather);
+}
+
+function handleSearchSubmit(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-form-input");
+
+  searchCity(searchInput.value);
+}
+
+let searchFormElement = document.querySelector(`#search-form`);
+searchFormElement.addEventListener("submit", handleSearchSubmit);
+
+searchCity("Paris");
+displayForecast();
