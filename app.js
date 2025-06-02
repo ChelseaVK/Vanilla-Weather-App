@@ -40,7 +40,7 @@ function formatDate(date) {
 
 function searchCity(city) {
   let apiKey = "5b7e32442badt617fc2dae0afo330c92";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
   axios.get(apiURL).then(refreshWeather);
 }
 
@@ -54,5 +54,18 @@ function handleSearchSubmit(event) {
 let searchFormElement = document.querySelector(`#search-form`);
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Paris");
-displayForecast();
+let forecast = document.querySelector("#forecast");
+
+forecast.innerHTML = ` <div class="weather-forecast-day">
+    <div class="weather-forecast-date">Tue</div>
+    <div class="weather-forecast-icon"></div>
+    <div class="weather-forecast-temperatures">
+      <div class="weather-forecast-temperature">
+        <strong>15°</strong>
+      </div>
+      <div class="weather-forecast-temperature">9°</div>
+    </div>
+  </div>
+`;
+
+console.log api
